@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parking Lot Lab</title>
+    <link rel="stylesheet" href="/src/ui/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Parking Lot Lab</h1>
+      <input id="design-name" aria-label="Design name" />
+      <select id="preset" aria-label="Load preset">
+        <option value="">Load layout…</option>
+        <option value="strip">Strip mall</option>
+        <option value="tight">Tight two-way lot</option>
+        <option value="blank">Blank lot</option>
+      </select>
+      <span id="warnings"></span>
+    </header>
+    <main>
+      <aside id="tools">
+        <h2>Build</h2>
+        <div id="tool-buttons"></div>
+        <p class="hint">
+          <kbd>R</kbd> rotate direction · right-drag erases<br />
+          Direction: <strong id="dir-label">N</strong>
+        </p>
+        <h2>Show</h2>
+        <label><input type="checkbox" id="ov-heat" /> Traffic heatmap</label>
+        <label><input type="checkbox" id="ov-incidents" checked /> Incidents</label>
+        <label><input type="checkbox" id="ov-nav" /> Nav grid</label>
+      </aside>
+      <section id="stage">
+        <canvas id="canvas"></canvas>
+        <div id="inspector" hidden></div>
+      </section>
+      <aside id="panel">
+        <div class="controls">
+          <button id="play" title="Space">▶ Play</button>
+          <select id="speed" aria-label="Speed">
+            <option value="1">1×</option>
+            <option value="4" selected>4×</option>
+            <option value="16">16×</option>
+            <option value="64">64×</option>
+          </select>
+          <button id="reset">Reset</button>
+        </div>
+        <div class="clock"><span id="clock">0:00</span> / <span id="clock-end">1:30:00</span></div>
+        <details open>
+          <summary>Scenario</summary>
+          <label>Peak arrivals <input type="range" id="cfg-rate" min="1" max="20" step="1" /> <span><span id="cfg-rate-v"></span>/min</span></label>
+          <label>Avg stay <input type="range" id="cfg-dwell" min="3" max="60" step="1" /> <span><span id="cfg-dwell-v"></span> min</span></label>
+          <label><span>Day length</span>
+            <select id="cfg-duration">
+              <option value="1800">30 min</option>
+              <option value="3600">1 h</option>
+              <option value="5400" selected>1.5 h</option>
+              <option value="10800">3 h</option>
+            </select>
+          </label>
+          <label>Seed <input type="number" id="cfg-seed" min="1" step="1" /></label>
+        </details>
+        <h2>Live metrics</h2>
+        <table id="metrics"></table>
+        <button id="record" class="primary">Run full day &amp; record</button>
+        <div id="progress" hidden><div></div></div>
+        <h2>Recorded runs</h2>
+        <div id="runs-wrap"><table id="runs"></table></div>
+        <button id="clear-runs" class="small">Clear runs</button>
+      </aside>
+    </main>
+    <script type="module" src="/src/ui/main.ts"></script>
+  </body>
+</html>
